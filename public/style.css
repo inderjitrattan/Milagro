@@ -4362,6 +4362,60 @@ button.mfp-close:before, button.mfp-arrow:before {
   border-top: none;
 }
 
+.kf-contact-layout {
+  padding-bottom: 90px;
+}
+
+.kf-contact-split {
+  margin-top: 30px;
+}
+
+.kf-contact-address {
+  margin: 0 0 20px 0;
+  max-width: 520px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.kf-contact-map {
+  overflow: hidden;
+  border-radius: 18px;
+  background: #0b0f12;
+  border: 1px solid #1a2026;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.kf-contact-map iframe {
+  display: block;
+  width: 100%;
+  height: 320px;
+  border: 0;
+  filter: grayscale(0.25) contrast(1.05);
+}
+
+.kf-contact-details {
+  margin-top: 18px;
+}
+
+.kf-contact-layout .kf-reservation-form {
+  max-width: 100%;
+  border-top: 3px solid #b99272;
+}
+
+@media screen and (max-width: 991px) {
+  .kf-contact-layout .kf-reservation-form {
+    margin-top: 30px;
+  }
+  .kf-contact-map iframe {
+    height: 280px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .kf-contact-map iframe {
+    height: 240px;
+  }
+}
+
 /**
 * Section Blog
 **/
@@ -5874,11 +5928,20 @@ small {
   margin-bottom: 40px;
 }
 
+.milagro-form-grid.milagro-franchise-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .milagro-form-field {
   position: relative;
 }
 
-.milagro-form-field input {
+.milagro-form-full {
+  grid-column: 1 / -1;
+}
+
+.milagro-form-field input,
+.milagro-form-field textarea {
   width: 100%;
   background: transparent;
   border: 2px solid #c6a36a;
@@ -5887,6 +5950,11 @@ small {
   color: rgba(255, 255, 255, 0.7);
   font-size: 15px;
   transition: all 0.3s ease;
+}
+
+.milagro-form-field textarea {
+  min-height: 160px;
+  resize: vertical;
 }
 
 .milagro-form-field select {
@@ -5905,11 +5973,13 @@ small {
   -moz-appearance: none;
 }
 
-.milagro-form-field input::placeholder {
+.milagro-form-field input::placeholder,
+.milagro-form-field textarea::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 
-.milagro-form-field input:focus {
+.milagro-form-field input:focus,
+.milagro-form-field textarea:focus {
   outline: none;
   border-color: #d4b580;
   background: rgba(198, 163, 106, 0.05);
@@ -6123,5 +6193,181 @@ small {
 
   .milagro-reservation-notice h2 {
     font-size: 18px;
+  }
+}
+
+/**
+* Franchise Form
+**/
+.milagro-franchise-section {
+  position: relative;
+  padding: 90px 0 110px;
+  background: #0b0f12;
+  overflow: hidden;
+}
+
+.milagro-franchise-section:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(1200px 600px at 10% 20%, rgba(198, 163, 106, 0.12), transparent 60%),
+    radial-gradient(900px 700px at 90% 80%, rgba(255, 255, 255, 0.05), transparent 55%);
+  pointer-events: none;
+}
+
+.milagro-franchise-card {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 70px 60px 60px;
+  background: rgba(5, 6, 7, 0.88);
+  border-radius: 26px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(198, 163, 106, 0.12);
+}
+
+.milagro-franchise-header {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.milagro-franchise-title {
+  font-family: "Merienda", "Oswald", sans-serif;
+  color: #c6a36a;
+  font-size: 48px;
+  margin: 0 0 20px;
+  line-height: 1.2;
+}
+
+.milagro-franchise-subtitle {
+  margin: 0 auto;
+  max-width: 720px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+
+.milagro-franchise-form {
+  position: relative;
+}
+
+.milagro-franchise-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 18px;
+  margin-bottom: 35px;
+}
+
+.milagro-franchise-field {
+  position: relative;
+}
+
+.milagro-franchise-full {
+  grid-column: 1 / -1;
+}
+
+.milagro-franchise-field input,
+.milagro-franchise-field textarea {
+  width: 100%;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 16px 22px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6);
+}
+
+.milagro-franchise-field textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.milagro-franchise-field input::placeholder,
+.milagro-franchise-field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.milagro-franchise-field input:focus,
+.milagro-franchise-field textarea:focus {
+  outline: none;
+  border-color: rgba(198, 163, 106, 0.55);
+  box-shadow: 0 0 0 1px rgba(198, 163, 106, 0.4);
+}
+
+.milagro-franchise-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.milagro-franchise-btn {
+  background: linear-gradient(140deg, #c8a65c 5%, #fadda1 54%, #fadda1 59%, #c8a65c 100%);
+  border: none;
+  border-radius: 40px;
+  padding: 14px 48px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.milagro-franchise-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(198, 163, 106, 0.25);
+}
+
+.milagro-franchise-success {
+  margin-top: 20px;
+  text-align: center;
+  color: #7ce5b0;
+}
+
+.milagro-franchise-success p {
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  .milagro-franchise-card {
+    padding: 60px 45px 50px;
+  }
+
+  .milagro-franchise-title {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .milagro-franchise-section {
+    padding: 70px 0 90px;
+  }
+
+  .milagro-franchise-card {
+    padding: 50px 30px 40px;
+  }
+
+  .milagro-franchise-title {
+    font-size: 32px;
+  }
+
+  .milagro-franchise-subtitle {
+    font-size: 14px;
+  }
+
+  .milagro-franchise-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .milagro-franchise-card {
+    padding: 40px 22px 35px;
+  }
+
+  .milagro-franchise-title {
+    font-size: 28px;
   }
 }

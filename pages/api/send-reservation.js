@@ -5,7 +5,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const { name, mobile, email, date, time, seats } = req.body;
+  const { name, mobile, email, date, time, seats, source } = req.body;
+  const isContactRequest = source === 'contact';
 
   // Create a transporter using SMTP
   const transporter = nodemailer.createTransport({
@@ -22,9 +23,11 @@ export default async function handler(req, res) {
   const restaurantMailOptions = {
     from: process.env.SMTP_USER,
     to: process.env.RESTAURANT_EMAIL || process.env.SMTP_USER,
-    subject: 'New Reservation Request - Milagro Restaurant',
+    subject: isContactRequest
+      ? 'New Contact Us Reservation Request - Milagro Restaurant'
+      : 'New Reservation Request - Milagro Restaurant',
     html: `
-      <h2>New Reservation Request</h2>
+      <h2>${isContactRequest ? 'New Contact Us Reservation Request' : 'New Reservation Request'}</h2>
       <p><strong>Name:</strong> ${name}</p>
       <p><strong>Mobile:</strong> ${mobile}</p>
       <p><strong>Email:</strong> ${email}</p>
@@ -38,16 +41,26 @@ export default async function handler(req, res) {
   const customerMailOptions = {
     from: process.env.SMTP_USER,
     to: email,
-    subject: 'Reservation Request Received - Milagro Restaurant',
+    subject: isContactRequest
+      ? 'Contact Us Request Received - Milagro Restaurant'
+      : 'Reservation Request Received - Milagro Restaurant',
     html: `
-      <h2>Thank you for your reservation request!</h2>
+      <h2>${
+        isContactRequest
+          ? 'Thank you for contacting Milagro!'
+          : 'Thank you for your reservation request!'
+      }</h2>
       <p>Dear ${name},</p>
-      <p>We have received your reservation request with the following details:</p>
+      <p>${
+        isContactRequest
+          ? 'We have received your Contact Us reservation request with the following details:'
+          : 'We have received your reservation request with the following details:'
+      }</p>
       <p><strong>Date:</strong> ${date}</p>
       <p><strong>Time:</strong> ${time}</p>
       <p><strong>Number of Seats:</strong> ${seats}</p>
       <br>
-      <p>We will confirm your reservation shortly.</p>
+      <p>We will confirm your request shortly.</p>
       <p>Best regards,<br>Milagro Restaurant Team</p>
     `,
   };

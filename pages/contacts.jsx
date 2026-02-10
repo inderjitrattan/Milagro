@@ -1,191 +1,384 @@
-import InstaCarousel from "@/src/components/sliders/InstaCarousel";
-import ContactForm from "@/src/components/ContactForm";
+import { useEffect, useRef, useState } from "react";
+import flatpickr from "flatpickr";
+import "flatpickr/dist/flatpickr.min.css";
 import Layouts from "@/src/layouts/Layouts";
 
 const Contacts = () => {
+  const formData = {
+    apiUrl: "/api/send-reservation",
+  };
+
+  const dateInputRef = useRef(null);
+  const [formValues, setFormValues] = useState({
+    name: "",
+    tel: "",
+    email: "",
+    date: "",
+    time: "",
+    seats: 1,
+    gathering: "",
+  });
+  const [formError, setFormError] = useState("");
+  const [formSuccess, setFormSuccess] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!dateInputRef.current) {
+      return;
+    }
+
+    const instance = flatpickr(dateInputRef.current, {
+      minDate: new Date(),
+      dateFormat: "Y-m-d",
+      onChange: (selectedDates) => {
+        if (selectedDates.length === 0) {
+          return;
+        }
+        const date = selectedDates[0];
+        const dateStr =
+          date.getFullYear() +
+          "-" +
+          String(date.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          String(date.getDate()).padStart(2, "0");
+        setFormValues((prevValues) => ({
+          ...prevValues,
+          date: dateStr,
+        }));
+      },
+    });
+
+    return () => {
+      instance.destroy();
+    };
+  }, []);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+    if (formError) {
+      setFormError("");
+    }
+    if (formSuccess) {
+      setFormSuccess("");
+    }
+  };
+
+  const handleSeatsChange = (delta) => {
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      seats: Math.max(1, Number(prevValues.seats || 1) + delta),
+    }));
+  };
+
+  const getReservationValidationError = () => {
+    const name = formValues.name.trim();
+    if (!name) {
+      return "Please enter your name.";
+    }
+
+    const rawMobile = formValues.tel.trim();
+    if (!rawMobile) {
+      return "Please enter your mobile number.";
+    }
+
+    const compactMobile = rawMobile.replace(/[\s-]/g, "");
+    let mobileNumber = compactMobile;
+    if (mobileNumber.startsWith("+91")) {
+      mobileNumber = mobileNumber.slice(3);
+    } else if (mobileNumber.startsWith("0") && mobileNumber.length === 11) {
+      mobileNumber = mobileNumber.slice(1);
+    }
+
+    if (!/^[6-9]\d{9}$/.test(mobileNumber)) {
+      return "Please enter a valid Indian mobile number.";
+    }
+
+    const email = formValues.email.trim();
+    if (!email) {
+      return "Please enter your email address.";
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      return "Please enter a valid email address.";
+    }
+
+    if (!formValues.date) {
+      return "Please select a date.";
+    }
+
+    if (!formValues.time) {
+      return "Please select a time.";
+    }
+
+    if (!formValues.seats) {
+      return "Please enter the number of seats.";
+    }
+
+    if (!formValues.gathering) {
+      return "Please select a gathering type.";
+    }
+
+    return null;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
+
+    const validationError = getReservationValidationError();
+    if (validationError) {
+      setFormError(validationError);
+      return;
+    }
+
+    setFormError("");
+    setFormSuccess("");
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(formData.apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formValues.name,
+          mobile: formValues.tel,
+          email: formValues.email,
+          date: formValues.date,
+          time: formValues.time,
+          seats: formValues.seats,
+          gathering: formValues.gathering,
+          source: "contact",
+        }),
+      });
+
+      const dataResponse = await response.json();
+
+      if (response.ok) {
+        setFormSuccess(
+          "Contact request sent successfully! Check your email for confirmation."
+        );
+        setFormValues({
+          name: "",
+          tel: "",
+          email: "",
+          date: "",
+          time: "",
+          seats: 1,
+          gathering: "",
+        });
+      } else {
+        setFormError(
+          dataResponse.message || "Error sending request. Please try again."
+        );
+      }
+    } catch (error) {
+      setFormError("Error sending request. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <Layouts>
-      {/* Section Started Inner */}
-      <section className="section kf-started-inner">
-        <div
-          className="kf-parallax-bg js-parallax"
-          style={{
-            backgroundImage: "url(images/menu_reservation_inner_bg.jpg)",
-          }}
-        />
+      <section className="section kf-contacts-info kf-contact-layout">
         <div className="container">
-          <h1
-            className="kf-h-title text-anim-1 scroll-animate"
-            data-splitting="chars"
-            data-animate="active"
-          >
-            Contact Us
-          </h1>
-        </div>
-      </section>
-      {/* Section Contacts Info */}
-      <section className="section kf-contacts-info">
-        <div className="container">
-          <div className="kf-contacts-items row">
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 align-center">
+          <h2 className="about-title">Contact Us</h2>
+          <div className="row kf-contact-split">
+            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+              <p className="kf-contact-address">
+                5th Floor, Sobo 25, S.V. Swatantryaveer Savarkar Rd,
+                Opposite Century Bazaar, Prabhadevi, Mumbai, Maharashtra
+                400 025.
+              </p>
               <div
-                className="kf-contacts-item element-anim-1 scroll-animate"
+                className="kf-contact-map element-anim-1 scroll-animate"
                 data-animate="active"
               >
-                <div className="image">
-                  {/*<img src="images/contact_icon1.png" alt="" />*/}
-                  <i className="las la-map-marked-alt" />
-                </div>
-                <div className="desc">
-                  <h5 className="name">Main Location</h5>
-                  <ul>
-                    <li>
-                      55 Main Street, 2nd Block, <br />
-                      3rd Floor, New York
-                    </li>
-                    <li>
-                      394 Main Street, 2nd Block, <br />
-                      3rd Floor, USA
-                    </li>
-                  </ul>
-                </div>
+                <iframe
+                  title="Milagro Mumbai map"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src="https://www.google.com/maps?q=Milagro%20Mumbai&output=embed"
+                />
+              </div>
+              <div className="kf-f-contact kf-contact-details">
+                <ul>
+                  <li>
+                    <i className="las la-phone" />
+                    <em>Phone Number :</em>
+                    <a href="tel:+919167779102">+91 91677 79102</a>
+                    <span> / </span>
+                    <a href="tel:+919167779102">+91 91677 79102</a>
+                  </li>
+                  <li>
+                    <i className="las la-envelope-open-text" />
+                    <em>Email Address :</em>
+                    <a href="mailto:concierge@milagromumbai.com">
+                      concierge@milagromumbai.com
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 align-center">
+            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-7">
               <div
-                className="kf-contacts-item element-anim-1 scroll-animate"
-                data-animate="active"
+                className="milagro-reservation-form"
               >
-                <div className="image">
-                  {/*<img src="images/contact_icon2.png" alt="" />*/}
-                  <i className="las la-envelope-open-text" />
-                </div>
-                <div className="desc">
-                  <h5 className="name">Email Address</h5>
-                  <ul>
-                    <li>
-                      supportkaffen@gmail.com <br />
-                      www.kaffeninfo.net
-                    </li>
-                    <li>
-                      supportkaffen@gmail.com <br />
-                      www.kaffeninfo.net
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 align-center">
-              <div
-                className="kf-contacts-item element-anim-1 scroll-animate"
-                data-animate="active"
-              >
-                <div className="image">
-                  {/*<img src="images/contact_icon3.png" alt="" />*/}
-                  <i className="las la-headset" />
-                </div>
-                <div className="desc">
-                  <h5 className="name">Phone Number</h5>
-                  <ul>
-                    <li>
-                      +012 (345) 678 99 <br />
-                      123456780
-                    </li>
-                    <li>
-                      +012 (345) 678 99 <br />
-                      123456780
-                    </li>
-                  </ul>
-                </div>
+                <form
+                  onSubmit={handleSubmit}
+                  id="contactReservationForm"
+                  action={formData.apiUrl}
+                >
+                  <div className="milagro-form-grid">
+                    <div className="milagro-form-field milagro-form-full">
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="Name *"
+                        onChange={handleChange}
+                        value={formValues.name}
+                      />
+                    </div>
+                    <div className="milagro-form-field milagro-form-full">
+                      <input
+                        type="tel"
+                        name="tel"
+                        placeholder="Mobile Number *"
+                        onChange={handleChange}
+                        value={formValues.tel}
+                      />
+                    </div>
+                    <div className="milagro-form-field milagro-form-full">
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Email *"
+                        onChange={handleChange}
+                        value={formValues.email}
+                      />
+                    </div>
+                    <div className="milagro-form-field">
+                      <input
+                        ref={dateInputRef}
+                        type="text"
+                        className="flatpickr-input"
+                        name="date"
+                        placeholder="Select Date *"
+                        value={formValues.date}
+                        readOnly
+                      />
+                    </div>
+                    <div className="milagro-form-field">
+                      <select
+                        name="time"
+                        value={formValues.time}
+                        onChange={handleChange}
+                      >
+                        <option value="">Select Time *</option>
+                        {[
+                          "12:00 PM",
+                          "12:30 PM",
+                          "1:00 PM",
+                          "1:30 PM",
+                          "2:00 PM",
+                          "2:30 PM",
+                          "3:00 PM",
+                          "3:30 PM",
+                          "4:00 PM",
+                          "4:30 PM",
+                          "7:00 PM",
+                          "7:30 PM",
+                          "8:00 PM",
+                          "8:30 PM",
+                          "9:00 PM",
+                          "9:30 PM",
+                          "10:00 PM",
+                        ].map((time) => (
+                          <option key={time} value={time}>
+                            {time}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="milagro-form-field milagro-seats-field">
+                      <input
+                        type="text"
+                        name="seats"
+                        placeholder="Seats *"
+                        value={formValues.seats}
+                        readOnly
+                      />
+                      <div className="milagro-seats-controls">
+                        <button
+                          type="button"
+                          className="milagro-seats-btn"
+                          onClick={() => handleSeatsChange(-1)}
+                        >
+                          -
+                        </button>
+                        <button
+                          type="button"
+                          className="milagro-seats-btn"
+                          onClick={() => handleSeatsChange(1)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <div className="milagro-form-field milagro-form-full">
+                      <select
+                        name="gathering"
+                        value={formValues.gathering}
+                        onChange={handleChange}
+                      >
+                        <option value="">Select Gathering *</option>
+                        <option value="small">A Small Gathering</option>
+                        <option value="family">Family Dinner</option>
+                        <option value="business">Business Meetup</option>
+                        <option value="celebration">Celebration</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                    <div className="milagro-form-full">
+                      <div className="milagro-form-actions">
+                        {formError && (
+                          <div className="milagro-form-warning" role="alert">
+                            {formError}
+                          </div>
+                        )}
+                        {formSuccess && (
+                          <div className="milagro-form-success" role="status">
+                            {formSuccess}
+                          </div>
+                        )}
+                        <button
+                          type="submit"
+                          className="kf-btn"
+                          disabled={isSubmitting}
+                        >
+                          <span>
+                            {isSubmitting ? "SENDING..." : "ENQUIRE NOW"}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </section>
-      {/* Section Contacts Form */}
-      <section className="section kf-contacts-form">
-        <div className="container">
-          <div
-            className="kf-reservation-form element-anim-1 scroll-animate"
-            data-animate="active"
-          >
-            <div className="kf-titles align-center">
-              <div className="kf-subtitle">Contact Us</div>
-              <h3 className="kf-title">Send Us Message</h3>
-            </div>
-            <ContactForm />
-          </div>
-        </div>
-      </section>
-      {/* Section Insta Carousel */}
-      <InstaCarousel />
-      {/* Section Brands */}
-      <div className="section kf-brands">
-        <div className="container">
-          <div className="kf-brands-items row">
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-2">
-              <div
-                className="kf-brands-item element-anim-1 scroll-animate"
-                data-animate="active"
-              >
-                <div className="image">
-                  <img src="images/brand1.png" alt="image" />
-                </div>
-              </div>
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-2">
-              <div
-                className="kf-brands-item element-anim-1 scroll-animate"
-                data-animate="active"
-              >
-                <div className="image">
-                  <img src="images/brand2.png" alt="image" />
-                </div>
-              </div>
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-2">
-              <div
-                className="kf-brands-item element-anim-1 scroll-animate"
-                data-animate="active"
-              >
-                <div className="image">
-                  <img src="images/brand3.png" alt="image" />
-                </div>
-              </div>
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-2">
-              <div
-                className="kf-brands-item element-anim-1 scroll-animate"
-                data-animate="active"
-              >
-                <div className="image">
-                  <img src="images/brand4.png" alt="image" />
-                </div>
-              </div>
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-2">
-              <div
-                className="kf-brands-item element-anim-1 scroll-animate"
-                data-animate="active"
-              >
-                <div className="image">
-                  <img src="images/brand5.png" alt="image" />
-                </div>
-              </div>
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-4 col-lg-2">
-              <div
-                className="kf-brands-item element-anim-1 scroll-animate"
-                data-animate="active"
-              >
-                <div className="image">
-                  <img src="images/brand6.png" alt="image" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </Layouts>
   );
 };

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import HTMLFlipBook from "react-pageflip";
 
 const FlipbookMenu = ({
@@ -10,20 +10,7 @@ const FlipbookMenu = ({
   imageOnly = false,
   showPageNumbers = true,
 }) => {
-  const bookRef = useRef(null);
   const [isPortrait, setIsPortrait] = useState(true);
-
-  const handlePrev = () => {
-    if (bookRef.current) {
-      bookRef.current.pageFlip().flipPrev();
-    }
-  };
-
-  const handleNext = () => {
-    if (bookRef.current) {
-      bookRef.current.pageFlip().flipNext();
-    }
-  };
 
   const handleFlip = (event) => {
     const pageIndex = typeof event?.data === "number" ? event.data : 0;
@@ -32,10 +19,14 @@ const FlipbookMenu = ({
 
   return (
     <section className="section kf-menu-flipbook">
+      <div className="kf-menu-page-header">
+        <div className="container">
+          <h2 className="about-title">Milagro Menu</h2>
+        </div>
+      </div>
       <div className="container">
         <div className="kf-flipbook-wrap element-anim-1 scroll-animate" data-animate="active">
           <HTMLFlipBook
-            ref={bookRef}
             width={520}
             height={680}
             size="stretch"
@@ -102,24 +93,6 @@ const FlipbookMenu = ({
               )}
             </div>
           </HTMLFlipBook>
-          <div className="kf-flipbook-arrows" aria-hidden={false}>
-            <button
-              type="button"
-              className="kf-flipbook-arrow kf-flipbook-arrow-left"
-              onClick={handlePrev}
-              aria-label="Previous page"
-            >
-              <i className="fas fa-chevron-left" />
-            </button>
-            <button
-              type="button"
-              className="kf-flipbook-arrow kf-flipbook-arrow-right"
-              onClick={handleNext}
-              aria-label="Next page"
-            >
-              <i className="fas fa-chevron-right" />
-            </button>
-          </div>
           <div className="kf-flipbook-hint">Tap or click the page corners to flip.</div>
         </div>
       </div>

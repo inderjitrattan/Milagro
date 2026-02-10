@@ -28,6 +28,10 @@ const Header = () => {
 
   const [activeNav, setActiveNav] = useState("home");
 
+  const handleMobileNavClick = () => {
+    setToggle(false);
+  };
+
   useEffect(() => {
     const setActiveFromPath = () => {
       if (router.pathname === "/blog" || router.pathname.startsWith("/blog/")) {
@@ -191,22 +195,34 @@ const Header = () => {
         <div className="kf-main-menu">
           <ul>
             <li className={activeNav === "home" ? "active" : ""}>
-              <Link href="/#home">Home</Link>
+              <Link href="/#home" onClick={handleMobileNavClick}>
+                Home
+              </Link>
             </li>
             <li className={activeNav === "about" ? "active" : ""}>
-              <Link href="/#about">About Us</Link>
+              <Link href="/#about" onClick={handleMobileNavClick}>
+                About Us
+              </Link>
             </li>
             <li className={activeNav === "menu" ? "active" : ""}>
-              <Link href="/#menu">Menu</Link>
+              <Link href="/#menu" onClick={handleMobileNavClick}>
+                Menu
+              </Link>
             </li>
             <li className={activeNav === "reservation" ? "active" : ""}>
-              <Link href="/#reservation">Reservation</Link>
+              <Link href="/#reservation" onClick={handleMobileNavClick}>
+                Reservation
+              </Link>
             </li>
             <li className={activeNav === "newsroom" ? "active" : ""}>
-              <Link href="/blog">Newsroom</Link>
+              <Link href="/blog" onClick={handleMobileNavClick}>
+                Newsroom
+              </Link>
             </li>
             <li className={activeNav === "contact" ? "active" : ""}>
-              <Link href="/contacts">Contact Us</Link>
+              <Link href="/contacts" onClick={handleMobileNavClick}>
+                Contact Us
+              </Link>
             </li>
           </ul>
         </div>

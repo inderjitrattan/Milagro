@@ -20,19 +20,47 @@ const Footer = () => {
               className="kf-f-hours element-anim-1 scroll-animate"
               data-animate="active"
             >
+              <h5>Quick Links</h5>
+              <ul>
+               <li>
+                  <a>Home</a>
+                </li>
+                <li>
+                  <a>About Us</a>
+                </li>
+                <li>
+                  <a>Menu</a>
+                </li>
+                <li>
+                  <a>Reservation</a>
+                </li>
+                <li>
+                  <a>Newsroom</a>
+                </li>
+                <li>
+                  <a>Contact Us</a>
+                </li>
+                <li></li>
+              </ul>
+            </div>
+          </div>  
+          <div className="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+            {/* hours */}
+            <div
+              className="kf-f-hours element-anim-1 scroll-animate"
+              data-animate="active"
+            >
               <h5>Working Hours</h5>
               <ul>
                 <li>
-                  Sunday - Thursday
-                  <em>08:00 am - 09:00pm</em>
+                  Open All Days
+                  <em>12:00 pm - 11:30pm</em>
                 </li>
                 <li>
-                  Only Friday
-                  <em>03:00 pm - 09:00pm</em>
+                  Brunch (Only Sunday)
+                  <em>12:30 pm - 04:30pm</em>
                 </li>
-                <li>
-                  <strong>Saturday Close</strong>
-                </li>
+                <li></li>
               </ul>
             </div>
           </div>
@@ -47,76 +75,17 @@ const Footer = () => {
                 <li>
                   <i className="las la-map-marker" />
                   <em>Location :</em>
-                  55 Main Street, New York
+                  5th Floor, S.V, Swatantryaveer Savarkar Rd, opposite Century Bazaar, Prabhadevi, Mumbai, Maharashtra 400 025.
                 </li>
                 <li>
                   <i className="las la-envelope-open-text" />
                   <em>Email Address :</em>
-                  kaffendev@gmail.com
+                  <a href="mailto:concierge@milagromumbai.com">concierge@milagromumbai.com</a>  
                 </li>
                 <li>
                   <i className="las la-phone" />
                   <em>Phone Number :</em>
-                  +012 (345) 678 99
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-            {/* gallery */}
-            <div
-              className="kf-f-gallery element-anim-1 scroll-animate"
-              data-animate="active"
-            >
-              <h5>Gallery</h5>
-              <ul>
-                <li>
-                  <a
-                    href="images/grid_gal1.jpg"
-                    className="kf-image-hover has-popup-image"
-                  >
-                    <img src="images/grid_gal1.jpg" alt="image" />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="images/grid_gal2.jpg"
-                    className="kf-image-hover has-popup-image"
-                  >
-                    <img src="images/grid_gal2.jpg" alt="image" />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="images/grid_gal3.jpg"
-                    className="kf-image-hover has-popup-image"
-                  >
-                    <img src="images/grid_gal3.jpg" alt="image" />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="images/grid_gal4.jpg"
-                    className="kf-image-hover has-popup-image"
-                  >
-                    <img src="images/grid_gal4.jpg" alt="image" />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="images/grid_gal5.jpg"
-                    className="kf-image-hover has-popup-image"
-                  >
-                    <img src="images/grid_gal5.jpg" alt="image" />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="images/grid_gal6.jpg"
-                    className="kf-image-hover has-popup-image"
-                  >
-                    <img src="images/grid_gal1.jpg" alt="image" />
-                  </a>
+                  <a href="tel:+919167779102">+91 9167779102</a><br /><a href="tel:+919167779102">+91 9167779102</a>
                 </li>
               </ul>
             </div>
@@ -125,10 +94,7 @@ const Footer = () => {
         <div className="row">
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-center">
             {/* copyright */}
-            <div
-              className="kf-copyright element-anim-1 scroll-animate"
-              data-animate="active"
-            >
+            <div className="kf-copyright element-anim-1 scroll-animate" data-animate="active">
               Copyright © 2026 Milagro. All Rights Reserved.
             </div>
           </div>
