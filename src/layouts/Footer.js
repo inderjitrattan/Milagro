@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Footer = () => {
   return (
     <div className="kf-footer">
@@ -9,9 +11,9 @@ const Footer = () => {
               className="kf-logo element-anim-1 scroll-animate"
               data-animate="active"
             >
-              <a href="index.html">
+              <Link href="/">
                 <img src="images/logo.png" alt="image" />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-6 col-lg-3">
@@ -22,23 +24,23 @@ const Footer = () => {
             >
               <h5>Quick Links</h5>
               <ul>
-               <li>
-                  <a>Home</a>
+                <li>
+                  <Link href="/#home">Home</Link>
                 </li>
                 <li>
-                  <a>About Us</a>
+                  <Link href="/#about">About Us</Link>
                 </li>
                 <li>
-                  <a>Menu</a>
+                  <Link href="/#menu">Menu</Link>
                 </li>
                 <li>
-                  <a>Reservation</a>
+                  <Link href="/#reservation">Reservation</Link>
                 </li>
                 <li>
-                  <a>Newsroom</a>
+                  <Link href="/blog">Newsroom</Link>
                 </li>
                 <li>
-                  <a>Contact Us</a>
+                  <Link href="/contacts">Contact Us</Link>
                 </li>
                 <li></li>
               </ul>

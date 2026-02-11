@@ -120,7 +120,7 @@ const Franchise = () => {
 
   return (
     <Layouts>
-      <section className="section milagro-reservation-page">
+      <section className="section kf-contacts-info kf-contact-layout">
         <div className="container">
           <h2 className="about-title">Franchise</h2>
         </div>
@@ -138,55 +138,56 @@ const Franchise = () => {
             id="franchiseForm"
             className="milagro-reservation-form"
             onSubmit={handleSubmit}
+            noValidate
           >
             <div className="milagro-form-grid milagro-franchise-grid">
               <div className="milagro-form-field milagro-form-full">
                 <input
                   type="text"
                   name="name"
-                  placeholder="Name"
+                  placeholder="Name *"
                   value={formValues.name}
                   onChange={handleChange}
-                  required="required"
+                  required
                 />
               </div>
               <div className="milagro-form-field">
                 <input
                   type="tel"
                   name="phone"
-                  placeholder="Mobile Number"
+                  placeholder="Mobile Number *"
                   value={formValues.phone}
                   onChange={handleChange}
-                  required="required"
+                  required
                 />
               </div>
               <div className="milagro-form-field">
                 <input
                   type="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder="Email *"
                   value={formValues.email}
                   onChange={handleChange}
-                  required="required"
+                  required
                 />
               </div>
               <div className="milagro-form-field milagro-form-full">
                 <input
                   type="text"
                   name="location"
-                  placeholder="Location"
+                  placeholder="Location *"
                   value={formValues.location}
                   onChange={handleChange}
-                  required="required"
+                  required
                 />
               </div>
               <div className="milagro-form-field milagro-form-full">
                 <textarea
                   name="message"
-                  placeholder="Message"
+                  placeholder="Message *"
                   value={formValues.message}
                   onChange={handleChange}
-                  required="required"
+                  required
                 />
               </div>
             </div>
