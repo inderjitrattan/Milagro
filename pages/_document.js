@@ -7,6 +7,7 @@ export default function Document() {
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="HandheldFriendly" content="true" />
+        <link rel="icon" href="/images/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -16,47 +17,47 @@ export default function Document() {
         {/* BEGIN CSS STYLES */}
         <link
           rel="stylesheet"
-          href="styles/bootstrap.css"
+          href="/styles/bootstrap.css"
           type="text/css"
           media="all"
         />
         <link
           rel="stylesheet"
-          href="fonts/font-awesome/css/font-awesome.css"
+          href="/fonts/font-awesome/css/font-awesome.css"
           type="text/css"
           media="all"
         />
         <link
           rel="stylesheet"
-          href="fonts/font-awesome/css/line-awesome.css"
+          href="/fonts/font-awesome/css/line-awesome.css"
           type="text/css"
           media="all"
         />
         <link
           rel="stylesheet"
-          href="styles/animate.css"
+          href="/styles/animate.css"
           type="text/css"
           media="all"
         />
         <link
           rel="stylesheet"
-          href="styles/magnific-popup.css"
+          href="/styles/magnific-popup.css"
           type="text/css"
           media="all"
         />
         <link
           rel="stylesheet"
-          href="styles/splitting.css"
+          href="/styles/splitting.css"
           type="text/css"
           media="all"
         />
         <link
           rel="stylesheet"
-          href="styles/swiper.css"
+          href="/styles/swiper.css"
           type="text/css"
           media="all"
         />
-        <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="/style.css" type="text/css" media="all" />
       </Head>
       <body>
         <Main />

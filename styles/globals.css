@@ -21,9 +21,8 @@ img.mfp-img {
   right: -24px;
 }
 
-/* Flipbook menu */
-
-.kf-menu-flipbook .kf-flipbook-wrap {
+/* Flipbook menu 
+*/.kf-menu-flipbook .kf-flipbook-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -199,6 +198,173 @@ img.mfp-img {
 .kf-flipbook-arrow:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(245, 215, 154, 0.4), 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Blog list layout */
+.milagro-blog-list {
+  position: relative;
+  background: #0b0b0b url("/images/BG.png") center/cover no-repeat;
+  overflow: hidden;
+}
+
+.milagro-blog-list::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 220, 140, 0.12), transparent 55%),
+    linear-gradient(120deg, rgba(8, 8, 8, 0.95), rgba(8, 8, 8, 0.75));
+  pointer-events: none;
+}
+
+.milagro-blog-list .container {
+  position: relative;
+  z-index: 1;
+}
+
+.milagro-blog-header {
+  max-width: 720px;
+  margin: 0 auto 48px auto;
+  text-align: center;
+}
+
+.milagro-blog-title {
+  font-size: 38px;
+  margin: 0 0 12px 0;
+  color: #f6e7c9;
+  letter-spacing: 0.02em;
+}
+
+.milagro-blog-subtitle {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+}
+
+.milagro-blog-items {
+  display: grid;
+  gap: 32px;
+}
+
+.milagro-blog-card {
+  display: grid;
+  grid-template-columns: minmax(240px, 420px) minmax(280px, 1fr);
+  gap: 32px;
+  padding: 28px;
+  border-radius: 26px;
+  background: rgba(17, 17, 17, 0.85);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.milagro-blog-media {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.milagro-blog-media img {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.milagro-blog-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.milagro-blog-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.milagro-blog-logo {
+  width: 62px;
+  height: 62px;
+  border-radius: 16px;
+  background: #e8e3db;
+  padding: 10px;
+  object-fit: contain;
+}
+
+.milagro-blog-name {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.3;
+  color: #f2d18a;
+  font-family: "Against", "Playfair Display", serif;
+}
+
+.milagro-blog-name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.milagro-blog-excerpt {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+}
+
+.milagro-blog-action {
+  margin-top: 6px;
+}
+
+.milagro-blog-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #f6e7c9;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 13px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(246, 231, 201, 0.4);
+  padding-bottom: 4px;
+}
+
+.milagro-blog-empty {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 80px 0;
+}
+
+@media screen and (max-width: 991px) {
+  .milagro-blog-card {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+  .milagro-blog-media img {
+    min-height: 240px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .milagro-blog-title {
+    font-size: 30px;
+  }
+  .milagro-blog-card {
+    padding: 20px;
+    gap: 20px;
+  }
+  .milagro-blog-name {
+    font-size: 24px;
+  }
+  .milagro-blog-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+  }
 }
 .kf-btn.kf-btn-outline {
   background: transparent;

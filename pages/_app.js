@@ -6,7 +6,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <Fragment>
       <Head>
-        <title>Milagro - Cafe &amp; Restaurant React NextJS Template</title>
+        <title>Milagro Mumbai</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Preloader />

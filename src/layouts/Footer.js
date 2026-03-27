@@ -12,7 +12,7 @@ const Footer = () => {
               data-animate="active"
             >
               <Link href="/">
-                <img src="images/logo.png" alt="image" />
+                <img src="/images/logo.png" alt="image" />
               </Link>
             </div>
           </div>
@@ -77,7 +77,9 @@ const Footer = () => {
                 <li>
                   <i className="las la-map-marker" />
                   <em>Location :</em>
-                  5th Floor, S.V, Swatantryaveer Savarkar Rd, opposite Century Bazaar, Prabhadevi, Mumbai, Maharashtra 400 025.
+                  5th Floor, Sobo 25, S.V. Swatantryaveer Savarkar Rd,
+                  Opposite Century Bazaar, Prabhadevi, Mumbai, Maharashtra
+                  400 025.
                 </li>
                 <li>
                   <i className="las la-envelope-open-text" />

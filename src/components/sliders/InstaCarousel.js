@@ -12,7 +12,7 @@ const InstaCarousel = () => {
             <SwiperSlide className="swiper-slide">
               <div className="slide-item">
                 <div className="image kf-image-hover">
-                  <a href="instagram.com" target="blank">
+                  <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                     <img src="images/ins_gal1.jpg" alt="image" />
                     <i className="fab fa-instagram" />
                   </a>
@@ -22,7 +22,7 @@ const InstaCarousel = () => {
             <SwiperSlide className="swiper-slide">
               <div className="slide-item">
                 <div className="image kf-image-hover">
-                  <a href="instagram.com" target="blank">
+                  <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                     <img src="images/ins_gal2.jpg" alt="image" />
                     <i className="fab fa-instagram" />
                   </a>
@@ -32,7 +32,7 @@ const InstaCarousel = () => {
             <SwiperSlide className="swiper-slide">
               <div className="slide-item">
                 <div className="image kf-image-hover">
-                  <a href="instagram.com" target="blank">
+                  <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                     <img src="images/ins_gal3.jpg" alt="image" />
                     <i className="fab fa-instagram" />
                   </a>
@@ -42,7 +42,7 @@ const InstaCarousel = () => {
             <SwiperSlide className="swiper-slide">
               <div className="slide-item">
                 <div className="image kf-image-hover">
-                  <a href="instagram.com" target="blank">
+                  <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                     <img src="images/ins_gal4.jpg" alt="image" />
                     <i className="fab fa-instagram" />
                   </a>
@@ -52,7 +52,7 @@ const InstaCarousel = () => {
             <SwiperSlide className="swiper-slide">
               <div className="slide-item">
                 <div className="image kf-image-hover">
-                  <a href="instagram.com" target="blank">
+                  <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                     <img src="images/ins_gal5.jpg" alt="image" />
                     <i className="fab fa-instagram" />
                   </a>
@@ -62,7 +62,7 @@ const InstaCarousel = () => {
             <SwiperSlide className="swiper-slide">
               <div className="slide-item">
                 <div className="image kf-image-hover">
-                  <a href="instagram.com" target="blank">
+                  <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                     <img src="images/ins_gal6.jpg" alt="image" />
                     <i className="fab fa-instagram" />
                   </a>
@@ -72,7 +72,7 @@ const InstaCarousel = () => {
             <SwiperSlide className="swiper-slide">
               <div className="slide-item">
                 <div className="image kf-image-hover">
-                  <a href="instagram.com" target="blank">
+                  <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                     <img src="images/ins_gal1.jpg" alt="image" />
                     <i className="fab fa-instagram" />
                   </a>
@@ -82,7 +82,7 @@ const InstaCarousel = () => {
             <SwiperSlide className="swiper-slide">
               <div className="slide-item">
                 <div className="image kf-image-hover">
-                  <a href="instagram.com" target="blank">
+                  <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                     <img src="images/ins_gal2.jpg" alt="image" />
                     <i className="fab fa-instagram" />
                   </a>
@@ -92,7 +92,7 @@ const InstaCarousel = () => {
             <SwiperSlide className="swiper-slide">
               <div className="slide-item">
                 <div className="image kf-image-hover">
-                  <a href="instagram.com" target="blank">
+                  <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                     <img src="images/ins_gal3.jpg" alt="image" />
                     <i className="fab fa-instagram" />
                   </a>
@@ -102,7 +102,7 @@ const InstaCarousel = () => {
             <SwiperSlide className="swiper-slide">
               <div className="slide-item">
                 <div className="image kf-image-hover">
-                  <a href="instagram.com" target="blank">
+                  <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                     <img src="images/ins_gal4.jpg" alt="image" />
                     <i className="fab fa-instagram" />
                   </a>
@@ -112,7 +112,7 @@ const InstaCarousel = () => {
             <SwiperSlide className="swiper-slide">
               <div className="slide-item">
                 <div className="image kf-image-hover">
-                  <a href="instagram.com" target="blank">
+                  <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                     <img src="images/ins_gal5.jpg" alt="image" />
                     <i className="fab fa-instagram" />
                   </a>
@@ -122,7 +122,7 @@ const InstaCarousel = () => {
             <SwiperSlide className="swiper-slide">
               <div className="slide-item">
                 <div className="image kf-image-hover">
-                  <a href="instagram.com" target="blank">
+                  <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                     <img src="images/ins_gal6.jpg" alt="image" />
                     <i className="fab fa-instagram" />
                   </a>

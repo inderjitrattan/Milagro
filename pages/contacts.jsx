@@ -3,12 +3,17 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import Layouts from "@/src/layouts/Layouts";
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+
 const Contacts = () => {
   const formData = {
     apiUrl: "/api/send-reservation",
   };
 
   const dateInputRef = useRef(null);
+  const mapContainerRef = useRef(null);
+  const [mapLoaded, setMapLoaded] = useState(false);
+  const [mapVisible, setMapVisible] = useState(false);
   const [formValues, setFormValues] = useState({
     name: "",
     tel: "",
@@ -50,6 +55,31 @@ const Contacts = () => {
 
     return () => {
       instance.destroy();
+    };
+  }, []);
+
+  // Intersection Observer for lazy loading map
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setMapVisible(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (mapContainerRef.current) {
+      observer.observe(mapContainerRef.current);
+    }
+
+    return () => {
+      if (mapContainerRef.current) {
+        observer.unobserve(mapContainerRef.current);
+      }
     };
   }, []);
 
@@ -143,26 +173,26 @@ const Contacts = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(formData.apiUrl, {
+      const response = await fetch(`${API_BASE_URL}/forms`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          form_type: "contact",
           name: formValues.name,
-          mobile: formValues.tel,
+          phone: formValues.tel,
           email: formValues.email,
           date: formValues.date,
           time: formValues.time,
           seats: formValues.seats,
           gathering: formValues.gathering,
-          source: "contact",
         }),
       });
 
       const dataResponse = await response.json();
 
-      if (response.ok) {
+      if (response.ok && dataResponse.success) {
         setFormSuccess(
           "Contact request sent successfully! Check your email for confirmation."
         );
@@ -200,25 +230,59 @@ const Contacts = () => {
                 400 025.
               </p>
               <div
+                ref={mapContainerRef}
                 className="kf-contact-map element-anim-1 scroll-animate"
                 data-animate="active"
+                style={{ position: 'relative', minHeight: '400px' }}
               >
-                <iframe
-                  title="Milagro Mumbai map"
-                  loading="lazy"
-                  allowFullScreen
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src="https://www.google.com/maps?q=Milagro%20Mumbai&output=embed"
-                />
+                {!mapLoaded && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    zIndex: 10,
+                    textAlign: 'center'
+                  }}>
+                    <div style={{
+                      width: '40px',
+                      height: '40px',
+                      border: '4px solid #f0f0f0',
+                      borderTop: '4px solid #d4a574',
+                      borderRadius: '50%',
+                      animation: 'spin 1s linear infinite',
+                      margin: '0 auto',
+                      marginBottom: '10px'
+                    }} />
+                    <p style={{ color: '#666', fontSize: '14px' }}>Loading map...</p>
+                  </div>
+                )}
+                {mapVisible && (
+                  <iframe
+                    title="Milagro Mumbai map"
+                    loading="lazy"
+                    fetchpriority="low"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    onLoad={() => setMapLoaded(true)}
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3772.1352142228!2d72.82202307580522!3d19.013762553922238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7cf83d1a3c1b3%3A0x14f5a25e32fc6aba!2sMilagro%20Mumbai!5e0!3m2!1sen!2sus!4v1770890731651!5m2!1sen!2sus"
+                    style={{ border: 0, width: '100%', height: '400px', display: mapLoaded ? 'block' : 'block' }}
+                  />
+                )}
+                <style>{`
+                  @keyframes spin {
+                    to { transform: rotate(360deg); }
+                  }
+                `}</style>
               </div>
               <div className="kf-f-contact kf-contact-details">
                 <ul>
                   <li>
-                    <i className="las la-phone" />
-                    <em>Phone Number :</em>
-                    <a href="tel:+919167779102">+91 91677 79102</a>
-                    <span> / </span>
-                    <a href="tel:+919167779102">+91 91677 79102</a>
+                    <i className="las la-map-marker" />
+                    <em>Location :</em>
+                    5th Floor, Sobo 25, S.V. Swatantryaveer Savarkar Rd,
+                    Opposite Century Bazaar, Prabhadevi, Mumbai, Maharashtra
+                    400 025.
                   </li>
                   <li>
                     <i className="las la-envelope-open-text" />
@@ -226,6 +290,13 @@ const Contacts = () => {
                     <a href="mailto:concierge@milagromumbai.com">
                       concierge@milagromumbai.com
                     </a>
+                  </li>
+                  <li>
+                    <i className="las la-phone" />
+                    <em>Phone Number :</em>
+                    <a href="tel:+919167779102">+91 91677 79102</a>
+                    <span> / </span>
+                    <a href="tel:+919167779102">+91 91677 79102</a>
                   </li>
                 </ul>
               </div>

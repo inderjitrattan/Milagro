@@ -2037,8 +2037,8 @@ button.mfp-close:before, button.mfp-arrow:before {
 
 .kf-started-item .name {
   margin: 0 0 50px 0;
-  font-family: "Oswald";
-  font-size: 120px;
+  font-family: "Against";
+  font-size: 60px;
   line-height: 1.2;
   color: #fff;
   font-weight: 500;
@@ -2047,7 +2047,6 @@ button.mfp-close:before, button.mfp-arrow:before {
 .kf-started-item .subtitles {
   position: relative;
   margin: 0 0 10px 0;
-  padding-left: 50px;
   font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -2061,7 +2060,6 @@ button.mfp-close:before, button.mfp-arrow:before {
   top: 50%;
   width: 30px;
   height: 1px;
-  background: #b99271;
 }
 
 .kf-bts .kf-btn {
@@ -2089,7 +2087,7 @@ button.mfp-close:before, button.mfp-arrow:before {
     min-height: 480px;
   }
   .kf-started-item .name {
-    font-size: 50px;
+    font-size: 30px;
     line-height: 60px;
   }
   .kf-started-item .subtitles ul li {
@@ -5685,44 +5683,49 @@ small {
 }
 
 .about-table-wrapper {
-  max-width: 1400px;
+  max-width: 1320px;
   margin: 0 auto;
+  background: #000;
+  padding: 10px;
 }
 
 .about-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 10px;
   table-layout: fixed;
   margin: 0 auto;
-  background: transparent;
+  background: #000;
 }
 
 .about-table td {
-  width: 20%;
-  height: 170px;
-  padding: 6px;
+  width: 17.25%;
+  height: 160px;
+  padding: 0;
   vertical-align: top;
+  overflow: hidden;
+  background: #000;
+}
+
+.about-table td[rowspan="2"] {
+  height: 330px;
 }
 
 .about-table td.center {
-  width: 28%;
-  height: 100%;
+  width: 31%;
+  height: 670px;
 }
 
-.about-table img {
+.about-table img,
+.about-table video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-@media (min-width: 769px) {
-  .about-table img[src="/images/abt03.webp"],
-  .about-table img[src="/images/abt04.webp"],
-  .about-table img[src="/images/abt09.webp"],
-  .about-table img[src="/images/abt10.webp"] {
-    height: 87mm;
-  }
+.about-table video {
+  object-position: center;
 }
 
 /* TEXT */
@@ -5737,16 +5740,31 @@ small {
 /* === RESPONSIVE === */
 @media (max-width: 992px) {
   .about-table td {
-    height: 150px;
+    height: 130px;
+  }
+
+  .about-table td[rowspan="2"] {
+    height: 268px;
+  }
+
+  .about-table td.center {
+    width: 34%;
+    height: 544px;
   }
 }
 
 @media (max-width: 768px) {
+  .about-table-wrapper {
+    padding: 6px;
+  }
+
   .about-table {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 6px;
+    border-spacing: 0;
     table-layout: auto;
+    grid-auto-flow: row;
   }
 
   .about-table tbody {
@@ -5758,20 +5776,67 @@ small {
   }
 
   .about-table td {
-    display: block;
-    height: 150px;
+    display: none !important;
+    height: auto;
+    aspect-ratio: 1 / 1;
     padding: 0;
     width: 100% !important;
   }
 
-  /* Position grid 2 (chef image) center on mobile */
-  .about-table td.center {
+  .about-table td.mobile-top-1,
+  .about-table td.mobile-top-2,
+  .about-table td.mobile-top-3,
+  .about-table td.center,
+  .about-table td.mobile-bottom-1,
+  .about-table td.mobile-bottom-2,
+  .about-table td.mobile-bottom-3 {
+    display: block !important;
+  }
+
+  .about-table td.mobile-top-1 { order: 1; }
+  .about-table td.mobile-top-2 { order: 2; }
+  .about-table td.mobile-top-3 {
+    order: 3;
     grid-column: 1 / -1;
-    height: 250px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .about-table td.center {
+    order: 4;
+    grid-column: 1 / -1;
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .about-table td.mobile-bottom-1 { order: 5; }
+  .about-table td.mobile-bottom-1 {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 10;
+  }
+
+  .about-table td.mobile-bottom-2 { order: 6; }
+  .about-table td.mobile-bottom-3 {
+    order: 7;
+    grid-column: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .about-table td.center video {
+    object-position: center top;
   }
 
   .about-title {
     font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-table {
+    gap: 5px;
+  }
+
+  .about-title {
+    font-size: 30px;
   }
 }
 

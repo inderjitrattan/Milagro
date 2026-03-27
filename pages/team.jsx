@@ -56,17 +56,11 @@ const Team = () => {
                     <div className="label">+012 (345) 678 99</div>
                   </div>
                   <div className="social">
-                    <a href="#">
+                    <a href="https://www.facebook.com/people/Milagro-Mumbai/61571835981536/" target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-facebook-f" />
                     </a>
-                    <a href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-linkedin" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-youtube" />
+                    <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
@@ -88,17 +82,11 @@ const Team = () => {
                     <div className="label">+012 (345) 678 99</div>
                   </div>
                   <div className="social">
-                    <a href="#">
+                    <a href="https://www.facebook.com/people/Milagro-Mumbai/61571835981536/" target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-facebook-f" />
                     </a>
-                    <a href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-linkedin" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-youtube" />
+                    <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
@@ -120,17 +108,11 @@ const Team = () => {
                     <div className="label">+012 (345) 678 99</div>
                   </div>
                   <div className="social">
-                    <a href="#">
+                    <a href="https://www.facebook.com/people/Milagro-Mumbai/61571835981536/" target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-facebook-f" />
                     </a>
-                    <a href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-linkedin" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-youtube" />
+                    <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
@@ -152,17 +134,11 @@ const Team = () => {
                     <div className="label">+012 (345) 678 99</div>
                   </div>
                   <div className="social">
-                    <a href="#">
+                    <a href="https://www.facebook.com/people/Milagro-Mumbai/61571835981536/" target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-facebook-f" />
                     </a>
-                    <a href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-linkedin" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-youtube" />
+                    <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
@@ -184,17 +160,11 @@ const Team = () => {
                     <div className="label">+012 (345) 678 99</div>
                   </div>
                   <div className="social">
-                    <a href="#">
+                    <a href="https://www.facebook.com/people/Milagro-Mumbai/61571835981536/" target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-facebook-f" />
                     </a>
-                    <a href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-linkedin" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-youtube" />
+                    <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
@@ -216,17 +186,11 @@ const Team = () => {
                     <div className="label">+012 (345) 678 99</div>
                   </div>
                   <div className="social">
-                    <a href="#">
+                    <a href="https://www.facebook.com/people/Milagro-Mumbai/61571835981536/" target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-facebook-f" />
                     </a>
-                    <a href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-linkedin" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-youtube" />
+                    <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
@@ -248,17 +212,11 @@ const Team = () => {
                     <div className="label">+012 (345) 678 99</div>
                   </div>
                   <div className="social">
-                    <a href="#">
+                    <a href="https://www.facebook.com/people/Milagro-Mumbai/61571835981536/" target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-facebook-f" />
                     </a>
-                    <a href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-linkedin" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-youtube" />
+                    <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
@@ -280,17 +238,11 @@ const Team = () => {
                     <div className="label">+012 (345) 678 99</div>
                   </div>
                   <div className="social">
-                    <a href="#">
+                    <a href="https://www.facebook.com/people/Milagro-Mumbai/61571835981536/" target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-facebook-f" />
                     </a>
-                    <a href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-linkedin" />
-                    </a>
-                    <a href="#">
-                      <i className="fab fa-youtube" />
+                    <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>

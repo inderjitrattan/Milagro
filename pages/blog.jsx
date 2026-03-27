@@ -1,145 +1,122 @@
 import Layouts from "@/src/layouts/Layouts";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const ASSET_BASE_URL = API_BASE_URL.replace(/\/api$/, '');
 
 const Blog = () => {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  const fetchBlogs = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/blogs?status=published`);
+      const data = await response.json();
+      if (data.success && data.data) {
+        setBlogs(data.data);
+      }
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return '/images/latest_blog1.jpg';
+    if (imagePath.startsWith('http')) return imagePath;
+    const normalized = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+    return `${ASSET_BASE_URL}${normalized}`;
+  };
+
+  const getLogoUrl = (logoPath) => {
+    if (!logoPath) return '/images/logo.png';
+    if (logoPath.startsWith('http')) return logoPath;
+    const normalized = logoPath.startsWith('/') ? logoPath : `/${logoPath}`;
+    return `${ASSET_BASE_URL}${normalized}`;
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const stripHtml = (value) => (value || "").replace(/<[^>]*>/g, "").trim();
+
+  const getExcerpt = (blog) => {
+    const raw = blog.excerpt || stripHtml(blog.content);
+    if (!raw) return "";
+    return raw.length > 220 ? `${raw.slice(0, 220)}...` : raw;
+  };
+
   return (
     <Layouts>
-      <section className="section kf-archive">
+      <section className="section milagro-blog-list">
         <div className="container">
-          <h2 className="about-title">Newsroom</h2>
-        </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <div className="kf-archive-items">
-                <div
-                  className="kf-archive-item element-anim-1 scroll-animate"
-                  data-animate="active"
-                >
-                  <div className="image kf-image-hover">
-                    <Link href="blog-single">
-                      <img src="images/latest_blog1.jpg" alt="image" />
-                    </Link>
-                  </div>
-                  <div className="desc">
-                    <div className="kf-date">
-                      <i className="far fa-calendar-alt" />
-                      25 Sep 2021
-                    </div>
-                    <h5 className="name">
-                      <Link href="blog-single">
-                        For most people, moderate coffee consumption can be
-                        incorporated into a healthy diet
-                      </Link>
-                    </h5>
-                    <div className="kf-text">
-                      Sed ut perspiciatis unde omnis iste natus error sit
-                      voluptatem accusantium dlorque laudantium totam rem
-                      aperiam eaque ipsa quae abillo
-                    </div>
-                    <div className="readmore">
-                      <Link href="blog-single" className="kf-btn-link">
-                        <span>read more</span>
-                        <i className="fas fa-chevron-right" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="kf-archive-item element-anim-1 scroll-animate"
-                  data-animate="active"
-                >
-                  <div className="image kf-image-hover">
-                    <Link href="blog-single">
-                      <img src="images/latest_blog2.jpg" alt="image" />
-                    </Link>
-                  </div>
-                  <div className="desc">
-                    <div className="kf-date">
-                      <i className="far fa-calendar-alt" />
-                      25 Sep 2021
-                    </div>
-                    <h5 className="name">
-                      <Link href="blog-single">
-                        Coffee makes you poop during the day because it affects
-                        your digestive system so quickly
-                      </Link>
-                    </h5>
-                    <div className="kf-text">
-                      Sed ut perspiciatis unde omnis iste natus error sit
-                      voluptatem accusantium dlorque laudantium totam rem
-                      aperiam eaque ipsa quae abillo
-                    </div>
-                    <div className="readmore">
-                      <Link href="blog-single" className="kf-btn-link">
-                        <span>read more</span>
-                        <i className="fas fa-chevron-right" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="kf-archive-item element-anim-1 scroll-animate"
-                  data-animate="active"
-                >
-                  <div className="image kf-image-hover">
-                    <Link href="blog-single">
-                      <img src="images/latest_blog3.jpg" alt="image" />
-                    </Link>
-                  </div>
-                  <div className="desc">
-                    <div className="kf-date">
-                      <i className="far fa-calendar-alt" />
-                      25 Sep 2021
-                    </div>
-                    <h5 className="name">
-                      <Link href="blog-single">
-                        Coffee with added milk provides all the macro nutrients
-                        in good amounts
-                      </Link>
-                    </h5>
-                    <div className="kf-text">
-                      Sed ut perspiciatis unde omnis iste natus error sit
-                      voluptatem accusantium dlorque laudantium totam rem
-                      aperiam eaque ipsa quae abillo
-                    </div>
-                    <div className="readmore">
-                      <Link href="blog-single" className="kf-btn-link">
-                        <span>read more</span>
-                        <i className="fas fa-chevron-right" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+          <div className="milagro-blog-header">
+            <h2 className="about-title">Newsroom</h2>
+          </div>
+          <div className="milagro-blog-items">
+            {loading ? (
+              <div className="milagro-blog-empty">
+                <p>Loading blogs...</p>
               </div>
-              {/* pager */}
-              <div
-                className="pager element-anim-1 scroll-animate"
-                data-animate="active"
-              >
-                <Link className="page-numbers prev" href="blog">
-                  <i className="fas fa-chevron-left" />
-                </Link>
-                <span className="page-numbers current">1</span>
-                <Link className="page-numbers" href="blog">
-                  2
-                </Link>
-                <Link className="page-numbers" href="blog">
-                  3
-                </Link>
-                <span className="page-numbers dots">…</span>
-                <Link className="page-numbers" href="blog">
-                  9
-                </Link>
-                <Link className="page-numbers next" href="blog">
-                  <i className="fas fa-chevron-right" />
-                </Link>
+            ) : blogs.length > 0 ? (
+              blogs.map((blog) => (
+                <article key={blog.id} className="milagro-blog-card">
+                  <div className="milagro-blog-media">
+                    <Link href={`/blog/${blog.slug}`}>
+                      <img
+                        src={getImageUrl(blog.featured_image)}
+                        alt={blog.title}
+                      />
+                    </Link>
+                  </div>
+                  <div className="milagro-blog-body">
+                    <div className="milagro-blog-meta">
+                      <img
+                        src={getLogoUrl(blog.blog_logo)}
+                        alt="Milagro"
+                        className="milagro-blog-logo"
+                      />
+                      <span className="milagro-blog-date">
+                        {formatDate(blog.published_at || blog.created_at)}
+                      </span>
+                    </div>
+                    <h3 className="milagro-blog-name">
+                      <Link href={`/blog/${blog.slug}`}>{blog.title}</Link>
+                    </h3>
+                    <p className="milagro-blog-excerpt">{getExcerpt(blog)}</p>
+                    <div className="milagro-blog-action">
+                      <Link
+                        href={`/blog/${blog.slug}`}
+                        className="milagro-blog-link"
+                      >
+                        Read More
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              ))
+            ) : (
+              <div className="milagro-blog-empty">
+                <p>No published blogs yet.</p>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
     </Layouts>
   );
 };
+
 export default Blog;

@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import Layouts from "@/src/layouts/Layouts";
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+
 const Franchise = () => {
   const [formValues, setFormValues] = useState({
     name: "",
@@ -70,6 +72,7 @@ const Franchise = () => {
     return null;
   };
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -88,15 +91,24 @@ const Franchise = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/send-franchise", {
+      const response = await fetch(`${API_BASE_URL}/forms`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formValues),
+        body: JSON.stringify({
+          form_type: 'franchise',
+          name: formValues.name,
+          email: formValues.email,
+          phone: formValues.phone,
+          location: formValues.location,
+          message: formValues.message
+        }),
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setFormSuccess("Thanks for your submission! We'll be in touch soon.");
         setFormValues({
           name: "",
@@ -106,9 +118,8 @@ const Franchise = () => {
           message: "",
         });
       } else {
-        const responseData = await response.json().catch(() => ({}));
         setFormError(
-          responseData?.message || "Oops! There was a problem submitting your form."
+          data?.message || "Oops! There was a problem submitting your form."
         );
       }
     } catch (error) {

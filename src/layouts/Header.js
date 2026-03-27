@@ -114,25 +114,19 @@ const Header = () => {
           <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 align-center">
             {/* social */}
             <div className="kf-h-social">
-              <a href="facebook.com" target="blank">
+              <a href="https://www.facebook.com/people/Milagro-Mumbai/61571835981536/" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-facebook-f" />
               </a>
-              <a href="twitter.com" target="blank">
-                <i className="fab fa-twitter" />
-              </a>
-              <a href="instagram.com" target="blank">
+              <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-instagram" />
-              </a>
-              <a href="youtube.com" target="blank">
-                <i className="fab fa-youtube" />
               </a>
             </div>
           </div>
           <div className="col-xs-12 col-sm-6 col-md-4 col-lg-4 align-right">
             {/* location */}
             <div className="kf-h-group">
-              <i className="fas fa-map-marker-alt" /> <em>Location :</em> 55
-              main street, new york
+              <i className="fas fa-map-marker-alt" /> <em>Location :</em> Mumbai
+              Maharashtra
             </div>
           </div>
         </div>
@@ -144,7 +138,7 @@ const Header = () => {
             {/* logo */}
             <div className="kf-logo">
               <Link href="/">
-                <img src="images/logo.png" alt="image" />
+                <img src="/images/logo.png" alt="Milagro" />
               </Link>
             </div>
           </div>
@@ -239,17 +233,11 @@ const Header = () => {
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               {/* social */}
               <div className="kf-h-social">
-                <a href="facebook.com" target="blank">
+                <a href="https://www.facebook.com/people/Milagro-Mumbai/61571835981536/" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-facebook-f" />
                 </a>
-                <a href="twitter.com" target="blank">
-                  <i className="fab fa-twitter" />
-                </a>
-                <a href="instagram.com" target="blank">
+                <a href="https://www.instagram.com/milagromumbai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-instagram" />
-                </a>
-                <a href="youtube.com" target="blank">
-                  <i className="fab fa-youtube" />
                 </a>
               </div>
             </div>
@@ -263,8 +251,8 @@ const Header = () => {
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               {/* location */}
               <div className="kf-h-group">
-                <i className="fas fa-map-marker-alt" /> <em>Location :</em> 55
-                main street, new york
+                <i className="fas fa-map-marker-alt" /> <em>Location :</em> Mumbai
+                Maharashtra
               </div>
             </div>
           </div>

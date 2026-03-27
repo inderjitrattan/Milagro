@@ -13,6 +13,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+
 const Index2 = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -108,17 +110,25 @@ const Index2 = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/send-reservation', {
+      const response = await fetch(`${API_BASE_URL}/forms`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          form_type: 'reservation',
+          name: formData.name,
+          email: formData.email,
+          phone: formData.mobile,
+          date: formData.date,
+          time: formData.time,
+          seats: formData.seats
+        }),
       });
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok && data.success) {
         setFormSuccess("Reservation request sent successfully! Check your email for confirmation.");
         // Reset form
         setFormData({
@@ -130,7 +140,7 @@ const Index2 = () => {
           seats: 1,
         });
       } else {
-        setFormError('Error sending reservation: ' + data.message);
+        setFormError('Error sending reservation: ' + (data.message || 'Please try again.'));
       }
     } catch (error) {
       console.error('Error:', error);
@@ -148,8 +158,8 @@ const Index2 = () => {
     }
     setFormError("");
 
-    const message = `Hi, I would like to make a reservation:\nName: ${formData.name}\nMobile: ${formData.mobile}\nEmail: ${formData.email}\nDate: ${formData.date}\nTime: ${formData.time}\nSeats: ${formData.seats}`;
-    const whatsappUrl = `https://wa.me/YOUR_PHONE_NUMBER?text=${encodeURIComponent(message)}`;
+    const message = "hi";
+    const whatsappUrl = `https://wa.me/9167779103?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
   };
 
@@ -271,25 +281,15 @@ const Index2 = () => {
               <div className="kf-started-item">
                 <div
                   className="slide js-parallax"
-                  style={{ backgroundImage: "url(images/started_img7.jpg)" }}
+                  style={{ backgroundImage: "url(images/slider.jpg" }}
                 />
                 <div className="container">
                   <div className="description align-left element-anim-1">
-                    <div className="subtitles">Welcome to the Milagro</div>
                     <h2 className="name text-anim-1" data-splitting="chars">
-                      Reserve Your <br />
-                      Table Today
+                      An Address of<br />
+                      Refined Indulgence
                     </h2>
-                    <div className="kf-bts">
-                      <Link href="menu-restaurant" className="kf-btn">
-                        <span>explore more</span>
-                        <i className="fas fa-chevron-right" />
-                      </Link>
-                      <Link href="reservation" className="kf-btn dark-btn">
-                        <span>get delivery</span>
-                        <i className="fas fa-chevron-right" />
-                      </Link>
-                    </div>
+                    <div className="subtitles">Each element placed with care, creating a space that feels intimate, elevated, and timeless.</div>
                   </div>
                 </div>
               </div>
@@ -302,21 +302,11 @@ const Index2 = () => {
                 />
                 <div className="container">
                   <div className="description align-left element-anim-1">
-                    <div className="subtitles">Welcome to the Milagro</div>
                     <h2 className="name text-anim-1" data-splitting="chars">
-                      Explore The <br />
-                      Lobsters
+                      Spanish-Inspired.<br />
+                      Thoughtfully Composed
                     </h2>
-                    <div className="kf-bts">
-                      <Link href="menu-restaurant" className="kf-btn">
-                        <span>explore more</span>
-                        <i className="fas fa-chevron-right" />
-                      </Link>
-                      <Link href="reservation" className="kf-btn dark-btn">
-                        <span>get delivery</span>
-                        <i className="fas fa-chevron-right" />
-                      </Link>
-                    </div>
+                    <div className="subtitles">Flavours rooted in tradition, refined through modern technique; crafted to be savoured, not rushed.</div>
                   </div>
                 </div>
               </div>
@@ -325,25 +315,15 @@ const Index2 = () => {
               <div className="kf-started-item">
                 <div
                   className="slide js-parallax"
-                  style={{ backgroundImage: "url(images/started_img6.jpg)" }}
+                  style={{ backgroundImage: "url(images/slider2.jpg)" }}
                 />
                 <div className="container">
                   <div className="description align-left element-anim-1">
-                    <div className="subtitles">Welcome to the Milagro</div>
                     <h2 className="name text-anim-1" data-splitting="chars">
-                      Premium <br />
-                      Meat Milagro
+                      Guided by Craft.<br />
+                      Led by Experience
                     </h2>
-                    <div className="kf-bts">
-                      <Link href="menu-restaurant" className="kf-btn">
-                        <span>explore more</span>
-                        <i className="fas fa-chevron-right" />
-                      </Link>
-                      <Link href="reservation" className="kf-btn dark-btn">
-                        <span>get delivery</span>
-                        <i className="fas fa-chevron-right" />
-                      </Link>
-                    </div>
+                    <div className="subtitles">At the helm is Chef José Manuel, bringing Spanish sensibilities and European finesse to every plate</div>
                   </div>
                 </div>
               </div>
@@ -363,16 +343,25 @@ const Index2 = () => {
       <table className="about-table">
         <tbody>
           <tr>
-            <td>
+            <td className="mobile-top-1">
               <img src="/images/abt01.webp" alt="" />
             </td>
 
-            <td rowSpan={2}>
+            <td rowSpan={2} className="mobile-top-3">
               <img src="/images/abt03.webp" alt="" />
             </td>
 
             <td rowSpan={4} className="center">
-              <img src="/images/abt_main.webp" alt="Chef" />
+              <video
+                src="/images/milagro_moment.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+              >
+                Your browser does not support the video tag.
+              </video>
             </td>
 
             <td>
@@ -385,7 +374,7 @@ const Index2 = () => {
           </tr>
 
           <tr>
-            <td>
+            <td className="mobile-top-2">
               <img src="/images/abt02.webp" alt="" />
             </td>
             <td>
@@ -402,11 +391,11 @@ const Index2 = () => {
               <img src="/images/abt05.webp" alt="" />
             </td>
 
-            <td rowSpan={2}>
+            <td rowSpan={2} className="mobile-bottom-1">
               <img src="/images/abt10.webp" alt="" />
             </td>
 
-            <td>
+            <td className="mobile-bottom-2">
               <img src="/images/abt11.webp" alt="" />
             </td>
           </tr>
@@ -415,28 +404,29 @@ const Index2 = () => {
             <td>
               <img src="/images/abt06.webp" alt="" />
             </td>
-            <td>
+            <td className="mobile-bottom-3">
               <img src="/images/abt12.webp" alt="" />
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+  <p className="about-text">
+  Milagro, meaning miracle in Spanish, was created as a place where time slows and moments are allowed to unfold. Inspired by the spirit of Spanish dining and shaped by contemporary European refinement, Milagro is an invitation to linger. It celebrates the beauty of unhurried meals, thoughtful conversation, and the quiet pleasure of being fully present at the table.
+  <br /><br />
 
-    <p className="about-text">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam nonummy
-      nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-      wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-      lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
-      amet.
-    </p>
+  The cuisine reflects this philosophy with clarity and care. Spanish flavours form the foundation, interpreted through modern technique and a respect for seasonality and balance. Each dish is composed with intention, familiar yet elevated, expressive without excess. Service flows intuitively, allowing the experience to feel seamless, personal, and gently immersive rather than orchestrated. Milagro's commitment to culinary excellence has been recognised with a nomination at the Times Food & Nightlife Awards 2026, one of India's most respected celebrations of restaurant and hospitality distinction.
+  <br /><br />
+
+  The space mirrors the mood of the menu; warm, layered, and understated in its elegance. Soft light, architectural detail, and curated textures come together to create an atmosphere that feels both refined and welcoming. While Milagro remains the culinary heart of the destination, it now shares its address with The Cocktail Room, a distinct, mood-led experience that allows evenings to evolve naturally from dining to drinks. Together, they offer moments designed not to impress, but to stay with you.
+  </p>
   </div>
 </section>
 
+      <div style={{ backgroundImage: "url(images/BG.png)" }}>
       {/* Section Special Dish */}
       <section
         className="section milagro-special milagro-special-1"
-        style={{ backgroundImage: "url(images/BG.png)" }}
         id="menu"
       >
         <div className="container">
@@ -462,8 +452,7 @@ const Index2 = () => {
                   Homemade<br />Spaghetti Vongole
                 </h2>
                 <p className="milagro-special-text">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                  diam nonummy nibh euismod tincidunt.
+                  Homemade spaghetti enveloped in briny clams and gentle aromatics, crafted to linger rather than overwhelm.
                 </p>
                 <Link href="menu-restaurant" className="kf-btn">
                   <span>View Menu</span>
@@ -478,7 +467,6 @@ const Index2 = () => {
       {/* Section Special Dish 2 */}
       <section
         className="section milagro-special milagro-special-2"
-        style={{ backgroundImage: "url(images/BG.png)" }}
       >
         <div className="container">
           <div className="row align-items-center">
@@ -502,8 +490,7 @@ const Index2 = () => {
                   Seafood Paella
                 </h2>
                 <p className="milagro-special-text">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                  diam nonummy nibh euismod tincidunt.
+                  A classic Spanish paella of bomba rice, prawns, and the day's catch, brought together in a rich lobster stock.
                 </p>
                 <Link href="menu-restaurant" className="kf-btn">
                   <span>View Menu</span>
@@ -518,7 +505,6 @@ const Index2 = () => {
       {/* Section Special Dish 3 */}
       <section
         className="section milagro-special milagro-special-3"
-        style={{ backgroundImage: "url(images/BG.png)" }}
       >
         <div className="container">
           <div className="row align-items-center">
@@ -542,8 +528,7 @@ const Index2 = () => {
                   Desserts
                 </h2>
                 <p className="milagro-special-text">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                  diam nonummy nibh euismod tincidunt.
+                  Desserts at Milagro are composed to conclude the meal with quiet indulgence offering refined finishes that echo the rhythm of the meal.
                 </p>
                 <Link href="menu-restaurant" className="kf-btn">
                   <span>View Menu</span>
@@ -554,6 +539,7 @@ const Index2 = () => {
           </div>
         </div>
       </section>
+      </div>
 
       {/* Section Reservation Page */}
       <section className="section milagro-reservation-page" id="reservation">
@@ -561,22 +547,17 @@ const Index2 = () => {
           <h2 className="about-title">Reservation</h2>
           
           <div className="milagro-reservation-description">
-            <p>
-              A Destination Where Spanish Artistry Meets European Sophistication. After A Celebrated Debut In Goa, Milagro Brings Its Signature Blend Of Exceptional Cuisine, Captivating Interiors, And World-Class Hospitality To The Heart Of Mumbai.
-            </p>
-            <p>
-              From Romantic Fine Dining To A High-Energy Cocktail Bar, Every Corner Is Crafted To Elevate Your Senses. For Those Seeking Exclusivity, Our Bespoke Private Dining Setups Transform Intimate Celebrations And Corporate Gatherings Into Unforgettable Moments.
-            </p>
+            <p className="about-text">An evening at Milagro begins with a reservation. What follows is time well spent; unhurried dining, considered service, and an atmosphere that invites you to stay a little longer.</p>
           </div>
 
-          <div className="milagro-reservation-notice">
-            <h2>A New Milagro Experience Is Taking Shape. Stay Tuned!<br />In The Meantime, You May Request A Reservation.</h2>
-          </div>
+            <div className="milagro-reservation-notice">
+              <h2>A New Milagro Experience Is Taking Shape. Stay Tuned!<br />In The Meantime, You May Request A Reservation.</h2>
+            </div>
 
-          <form className="milagro-reservation-form" onSubmit={handleSubmit}>
-            <div className="milagro-form-grid">
-              <div className="milagro-form-field">
-                <input
+            <form className="milagro-reservation-form" onSubmit={handleSubmit}>
+              <div className="milagro-form-grid">
+                <div className="milagro-form-field">
+                  <input
                   type="text"
                   name="name"
                   placeholder="Name *"
